@@ -1,12 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import HomePage from "./components/homePage";
+import GameSetting from "./components/gameSetting";
+
+import "./css/homePage.css";
+
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-      <h1>There is the second try!!!</h1>
-    </div>
+    <Router>
+      <div className="App">
+        <Switch>
+          <Route path="/gameSetting" component={GameSetting} />
+          <Route path="/" component={HomePage} />
+        </Switch>
+      </div>
+    </Router>
   );
 }
 

@@ -5,8 +5,8 @@
     font-size: 40px;
     padding: 20px;
     border-radius: 8px;  
-    background-color: #CB4335;
-    border: 1px solid #CB4335;
+    background-color: #C31B0A;
+    border: 1px solid #C31B0A;
     color: white;
     outline-style: none;
   }
@@ -36,3 +36,6 @@
     margin-top: 20px;
   }
   
+  .btn:hover{
+    background-color: #FF1800;
+  }

@@ -1,0 +1,15 @@
+.home-page-wrapper, .game-setting-wrapper, .perfect-center{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .num-of-player-wrapper, .board-size-wrapper{
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .board-size-wrapper{
+    align-items: center;
+  }

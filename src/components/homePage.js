@@ -9,7 +9,7 @@ class HomePage extends React.Component {
       <div className={"home-page-wrapper"}>
         <h1 className={"main-title"}>Four In a Row</h1>
         <Link style={{ textDecoration: "none" }} to="/gameSetting">
-          <button className={"play-game-btn"}>
+          <button className={"play-game-btn btn"}>
             PLAY NOW
           </button>
         </Link>

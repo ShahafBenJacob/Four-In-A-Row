@@ -25,6 +25,7 @@ class Game{
     // switchUser()
   }
 
+
 }
 
 const game = new Game();
@@ -57,3 +58,4 @@ console.log(game.setPlayers())
 // console.log(game.move(5))
 
 console.log(game)
+

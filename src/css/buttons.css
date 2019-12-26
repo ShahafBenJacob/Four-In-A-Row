@@ -1,17 +1,4 @@
-body{
-    background-color: #00107D;
-  }
-  
-.main-title{
-    font-family: 'Luckiest Guy', cursive;
-    font-size: 100px;
-    letter-spacing: 5px;
-    word-spacing: 10px;
-    color: #FFDC04;
-    text-shadow: 3px 3px white;
-}
-  
-.play-game-btn{
+.play-game-btn, .num-of-player-btn, .board-size-btn, .start-game-btn{
     font-family: 'Alegreya Sans', sans-serif;
     width: 250px;
     height: 100px;
@@ -23,11 +10,29 @@ body{
     color: white;
     outline-style: none;
   }
-  
-  .home-page-wrapper{
+
+  .num-of-player-btn, .board-size-btn{
+    width: 45%;
+    height: 75px;
+    margin-top: 20px;
+  }
+
+  .board-size-btn{
+    margin: 20px 10px 0;
+    width: auto;
+  }
+
+  .btn{
+    cursor:pointer;
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
+  }
+
+  .start-game-btn{
+    width: 90%;
+    height: 60px;
+    margin-top: 20px;
   }
   

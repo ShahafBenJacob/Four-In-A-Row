@@ -42,7 +42,6 @@ class Game{
     }else{
       this.currentPlayer = this.player1;
     }
-    console.log(this.currentPlayer);
     return this.currentPlayer;
   }
 

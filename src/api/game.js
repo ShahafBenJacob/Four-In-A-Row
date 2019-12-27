@@ -19,7 +19,11 @@ class Game{
     this.player2.init("#CB4335", this.player2.numberOfWins);
   }
 
+  
   move(numOfCol){
+    if(!numOfCol){
+      numOfCol = Math.floor(Math.random() * this.board.matrix.numberOfColumns) + 1; 
+    }   
     if (this.board.move(numOfCol, this.currentPlayer.color)){
       if (this.board.checkEndGame()){
         this.currentPlayer.numberOfWins++;
@@ -31,10 +35,6 @@ class Game{
     return false;
   }
 
-  randomMove(){
-    const randomCol = Math.floor(Math.random() * this.board.numberOfColumns) 
-    return this.move(randomCol);
-  }
 
   switchUser(){
     if (this.currentPlayer === this.player1){

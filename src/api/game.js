@@ -31,7 +31,11 @@ class Game{
     return false;
   }
 
-  
+  randomMove(){
+    const randomCol = Math.floor(Math.random() * this.board.numberOfColumns) 
+    return move(randomCol);
+  }
+
   switchUser(){
     if (this.currentPlayer == this.player1){
       this.currentPlayer = this.player2;

@@ -33,7 +33,7 @@ class Game{
 
   randomMove(){
     const randomCol = Math.floor(Math.random() * this.board.numberOfColumns) 
-    return move(randomCol);
+    return this.player2.move(randomCol);
   }
 
   switchUser(){

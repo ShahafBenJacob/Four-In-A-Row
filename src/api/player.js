@@ -4,15 +4,13 @@ class Player{
     this.numberOfWins = 0;
   }
 
-  init(color){
+  init(color, wins){
     this.color = color;
-    return this.color
+    this.numberOfWins = wins;
   }
 
 }
 
 module.exports = Player;
 
-// const newPlayer = new Player()
-// newPlayer.init("red")
-// console.log(newPlayer)
+

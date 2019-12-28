@@ -1,52 +1,63 @@
-const board = require('./board')
-const player = require('./player')
+ const colors = require('./variabels');
+const board = require("./board");
+const player = require("./player");
+const color = colors.colors;
 
-class Game{
-  constructor(){
+
+class Game {
+  constructor() {
     this.board = null;
     this.player1 = new player();
     this.player2 = new player();
     this.currentPlayer = this.player1;
   }
 
-  setBoard(rows, columns){
+  getCurrentPlayer = () => {
+    return this.currentPlayer;
+  }
+
+  setBoard = (rows, columns) => {
     this.board = new board();
     this.board.init(parseInt(rows), parseInt(columns));
   }
 
-  setPlayers(numOfPlayers){
-    this.player1.init("#FFDC04", this.player1.numberOfWins);
-    this.player2.init("#CB4335", this.player2.numberOfWins);
-  }
-
-  move(numOfCol){
-    if (this.board.move(numOfCol, this.currentPlayer.color)){
-      if (this.board.checkEndGame()){
-        this.currentPlayer.numberOfWins++;
-        return(this.currentPlayer)
-      }
-      this.switchUser();
-      return true
+  setPlayers = (numOfPlayers) => {
+    if (numOfPlayers === "1") {
+      this.player1.init(color.yellow, this.player1.numberOfWins, "Player 1");
+      this.player2.init(color.red, this.player2.numberOfWins, "Computer");
+      this.currentPlayer = this.player1;
+    } else {
+      this.player1.init(color.yellow, this.player1.numberOfWins, "Player 1");
+      this.player2.init(color.red, this.player2.numberOfWins, "Player 2");
     }
-    return false;
   }
 
-  randomMove(){
-    const randomCol = Math.floor(Math.random() * this.board.numberOfColumns) 
-    return this.player2.move(randomCol);
-  }
+  move = (numOfCol) => {
+      if (this.board.move(numOfCol, this.currentPlayer.color)) {
+        if (this.board.checkEndGame()) {
+          this.currentPlayer.numberOfWins++;
+          return this.currentPlayer;
+        }
+        this.switchUser();
+        return true;
+      }
+      return false;
+    }
+  
 
-  switchUser(){
-    if (this.currentPlayer == this.player1){
+  switchUser = () => {
+    if (this.currentPlayer.id === this.player1.id) {
       this.currentPlayer = this.player2;
-    }else{
+      if(this.currentPlayer.id === "Computer"){
+        const numOfCol =
+        Math.floor(Math.random() * this.board.matrix.numberOfColumns) + 1;
+        this.move(numOfCol)   
+      }
+    } else {
       this.currentPlayer = this.player1;
     }
     return this.currentPlayer;
   }
-
 }
 
-
 module.exports = Game;
-

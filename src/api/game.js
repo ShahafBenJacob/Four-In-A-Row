@@ -40,6 +40,7 @@ class Game {
         }
         this.switchUser();
         return true;
+
       }
       return false;
     }

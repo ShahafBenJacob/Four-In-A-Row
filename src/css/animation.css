@@ -1,0 +1,11 @@
+/* @keyframes coin {
+	from {left: 20%;}
+	to {right: 120%;}
+}
+
+
+.coin{
+	position:absolute;
+    animation: coin linear infinite;
+	animation-duration: 10s;
+} */

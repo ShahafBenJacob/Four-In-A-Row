@@ -27,7 +27,7 @@ class GameSetting extends React.Component {
     });
   };
 
-  checkFullChecking = () => {
+  checkFullSetting = () => {
     if (this.state.numOfPlayers === "" && this.state.boardSize === ""){
       alert("You must choose the setting of the game!")
     } else if (this.state.numOfPlayers === ""){
@@ -133,7 +133,7 @@ class GameSetting extends React.Component {
           <Link style={{ textDecoration: "none" }} to= {this.state.numOfPlayers !== "" && this.state.boardSize !== "" ? "/GameOnPlay" : "/gameSetting"}>
             <div className={"perfect-center"}>
               <button className={"start-game-btn btn"}
-              onClick={ () => this.checkFullChecking()}>
+              onClick={ () => this.checkFullSetting()}>
                 Let the Game Begin
               </button>
             </div>

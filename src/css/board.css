@@ -1,0 +1,25 @@
+
+.square{
+    width: 100px;
+    height: 100px;
+    border: 2px solid #717D7E;
+    background-color: #717D7E;
+}
+
+.square-wrapper{
+    border: 20px solid #717D7E;
+    border-radius: 20px;
+    box-shadow: 10px 10px 10px#17202A;
+}
+
+.coin{
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+}
+
+.inner-coin{
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+}

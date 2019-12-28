@@ -1,4 +1,4 @@
-.home-page-wrapper, .game-setting-wrapper, .perfect-center{
+.game-setting-wrapper, .perfect-center, .home-page-wrapper{
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -12,4 +12,25 @@
 
   .board-size-wrapper{
     align-items: center;
+  }
+
+  .board, .square, .coin, .inner-coin{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .home-page-wrapper, .game-setting-wrapper{
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .main-game-section{
+    display: flex;
+  }
+  .game-on-play-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
   }

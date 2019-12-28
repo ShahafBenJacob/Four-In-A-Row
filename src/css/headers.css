@@ -7,16 +7,24 @@
     text-shadow: 3px 3px white;
 }
 
+.main-title{
+    padding-bottom: 80px;
+}
+
 .game-setting-main-title{
-    font-size: 80px;
     text-shadow: 2px 2px white;
     font-family: 'Alegreya Sans', sans-serif;
     letter-spacing: 3px;
 }
 
-.setting-titles, .sub-title{
+.setting-titles, .sub-title, .game-sub-title{
     color: white;
     font-size: 30px;
+}
+
+.game-sub-title{
+    padding-left: 40px;
+    font-size: 50px;
 }
 
 .sub-title{
@@ -27,6 +35,12 @@
 
 
 h1, h2, h3, h4, h5, h6{
-    margin: 20px 0 0;
+    margin: 0;
+    font-family: 'Alegreya Sans', sans-serif;
+
     
+}
+
+.game-on-play-main-title{
+    padding: 0;
 }

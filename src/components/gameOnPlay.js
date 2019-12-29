@@ -30,10 +30,19 @@ class GameOnPlay extends React.Component {
       });
     } else {
       alert("O.K bye bye!");
+      this.resetBoard()
     }
   };
 
-  
+  resetBoard = () => {
+    game.setBoard(
+      game.board.matrix.numberOfRows,
+      game.board.matrix.numberOfColumns
+    );
+    this.setState({
+      board: game.board.matrix.matrixArray
+    });
+  }
 
   move = i => {
     const makeAMove = game.move(i + 1);
@@ -42,6 +51,9 @@ class GameOnPlay extends React.Component {
       this.setState({
         board: game.board.matrix.matrixArray
       })
+    }else if (typeof makeAMove == "string"){
+      alert("No one won! lets play again!");
+      this.resetBoard()
     } else if (makeAMove) {
       this.setState({
         currPlayer: game.getCurrentPlayer(),
@@ -63,11 +75,6 @@ class GameOnPlay extends React.Component {
           <Link style={{ textDecoration: "none" }} to={"/gameSetting"}>
             <button className={"back-to-setting-btn btn"}>
               Back to Setting Page
-            </button>
-          </Link>
-          <Link style={{ textDecoration: "none" }} to={"/"}>
-            <button className={"back-to-setting-btn btn"}>
-              Start a New Game
             </button>
           </Link>
         </div>

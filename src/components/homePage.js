@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../css/animation.css";
 import { bounce } from "react-animations";
 import styled, { keyframes } from "styled-components";
 

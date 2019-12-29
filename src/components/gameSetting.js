@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import NumOfPlayersButtons from "./numOfPlayersButtons";
+import BoardSizeButtons from "./boardSizeButtons";
 
 const Game = require("../api/game");
 export const game = new Game();
@@ -14,7 +16,7 @@ class GameSetting extends React.Component {
   }
   setBoardSize = value => {
     const rowsCols = value.split("/");
-    game.setBoard((rowsCols[0]), rowsCols[1]);
+    game.setBoard(rowsCols[0], rowsCols[1]);
     this.setState({
       boardSize: value
     });
@@ -28,16 +30,18 @@ class GameSetting extends React.Component {
   };
 
   checkFullSetting = () => {
-    if (this.state.numOfPlayers === "" && this.state.boardSize === ""){
-      alert("You must choose the setting of the game!")
-    } else if (this.state.numOfPlayers === ""){
-      alert("You need to choose number of players. If you like to play with the computer, please click on 1")
+    if (this.state.numOfPlayers === "" && this.state.boardSize === "") {
+      alert("You must choose the setting of the game!");
+    } else if (this.state.numOfPlayers === "") {
+      alert(
+        "You need to choose number of players. If you like to play with the computer, please click on 1"
+      );
     } else if (this.state.boardSize === "") {
-      alert("You need to choose size of the board")
+      alert("You need to choose size of the board");
     } else {
-      return
+      return;
     }
-  }
+  };
 
   render() {
     return (
@@ -51,32 +55,16 @@ class GameSetting extends React.Component {
         <div>
           <h2 className={"setting-titles"}>Choose Number Of Players:</h2>
           <div className={"num-of-player-wrapper"}>
-            <button
-              className={"num-of-player-btn btn"}
-              value="1"
-              onClick={e => this.setPlayers(e.target.value)}
-              style={{
-                backgroundColor:
-                  this.state.numOfPlayers === "1" ? "#FF1800" : "#C31B0A",
-                border:
-                  this.state.numOfPlayers === "1" ? "5px solid #C31B0A" : ""
-              }}
-            >
-              1
-            </button>
-            <button
-              className={"num-of-player-btn btn"}
-              value="2"
-              onClick={e => this.setPlayers(e.target.value)}
-              style={{
-                backgroundColor:
-                  this.state.numOfPlayers === "2" ? "#FF1800" : "#C31B0A",
-                border:
-                  this.state.numOfPlayers === "2" ? "5px solid #C31B0A" : ""
-              }}
-            >
-              2
-            </button>
+            <NumOfPlayersButtons
+              value={"1"}
+              numOfPlayers={this.state.numOfPlayers}
+              setPlayers={this.setPlayers}
+            />
+            <NumOfPlayersButtons
+              value={"2"}
+              numOfPlayers={this.state.numOfPlayers}
+              setPlayers={this.setPlayers}
+            />
           </div>
 
           <h2 className={"setting-titles"}>
@@ -84,56 +72,41 @@ class GameSetting extends React.Component {
             <span className={"sub-title"}> rows / columns </span>
           </h2>
           <div className={"board-size-wrapper"}>
-            <button
-              className={"board-size-btn btn"}
-              value="7/8"
-              onClick={e => this.setBoardSize(e.target.value)}
-              style={{
-                backgroundColor:
-                  this.state.boardSize === "7/8" ? "#FF1800" : "#C31B0A",
-                border:
-                  this.state.boardSize === "7/8" ? "5px solid #C31B0A" : "",
-                width: "160px",
-                height: "140px"
-              }}
-            >
-              7 / 8
-            </button>
-            <button
-              className={"board-size-btn btn"}
-              value="6/7"
-              onClick={e => this.setBoardSize(e.target.value)}
-              style={{
-                backgroundColor:
-                  this.state.boardSize === "6/7" ? "#FF1800" : "#C31B0A",
-                border:
-                  this.state.boardSize === "6/7" ? "5px solid #C31B0A" : "",
-                width: "140px",
-                height: "120px"
-              }}
-            >
-              6 / 7
-            </button>
-            <button
-              className={"board-size-btn btn"}
-              value="5/6"
-              onClick={e => this.setBoardSize(e.target.value)}
-              style={{
-                backgroundColor:
-                  this.state.boardSize === "5/6" ? "#FF1800" : "#C31B0A",
-                border:
-                  this.state.boardSize === "5/6" ? "5px solid #C31B0A" : "",
-                width: "120px",
-                height: "100px"
-              }}
-            >
-              5 / 6
-            </button>
+            <BoardSizeButtons
+              value={"7 / 8"}
+              boardSize={this.state.boardSize}
+              setBoardSize={this.setBoardSize}
+              width={"160"}
+              height={"140"}
+            />
+            <BoardSizeButtons
+              value={"6 / 7"}
+              boardSize={this.state.boardSize}
+              setBoardSize={this.setBoardSize}
+              width={"140"}
+              height={"120"}
+            />
+            <BoardSizeButtons
+              value={"5 / 6"}
+              boardSize={this.state.boardSize}
+              setBoardSize={this.setBoardSize}
+              width={"120"}
+              height={"100"}
+            />
           </div>
-          <Link style={{ textDecoration: "none" }} to= {this.state.numOfPlayers !== "" && this.state.boardSize !== "" ? "/GameOnPlay" : "/gameSetting"}>
+          <Link
+            style={{ textDecoration: "none" }}
+            to={
+              this.state.numOfPlayers !== "" && this.state.boardSize !== ""
+                ? "/GameOnPlay"
+                : "/gameSetting"
+            }
+          >
             <div className={"perfect-center"}>
-              <button className={"start-game-btn btn"}
-              onClick={ () => this.checkFullSetting()}>
+              <button
+                className={"start-game-btn btn"}
+                onClick={() => this.checkFullSetting()}
+              >
                 Let the Game Begin
               </button>
             </div>

@@ -3,6 +3,7 @@ import { game } from "./gameSetting";
 import Board from "./board";
 import { Link } from "react-router-dom";
 import Coin from "./coin";
+import {colors} from '../api/variabels';
 import { tada } from "react-animations";
 import styled, { keyframes } from "styled-components";
 const Wow = styled.div`
@@ -32,13 +33,16 @@ class GameOnPlay extends React.Component {
     }
   };
 
+  
+
   move = i => {
     const makeAMove = game.move(i + 1);
     if (typeof makeAMove == "object") {
-      setTimeout(() => this.confirmationDialog(makeAMove.id), 1000);
+      setTimeout(() => this.confirmationDialog(makeAMove.id), 500);
       this.setState({
         board: game.board.matrix.matrixArray
-      });
+      })
+      return true
     } else if (makeAMove) {
       this.setState({
         currPlayer: game.getCurrentPlayer(),
@@ -59,7 +63,12 @@ class GameOnPlay extends React.Component {
           </h1>
           <Link style={{ textDecoration: "none" }} to={"/gameSetting"}>
             <button className={"back-to-setting-btn btn"}>
-              Back to setting page
+              Back to Setting Page
+            </button>
+          </Link>
+          <Link style={{ textDecoration: "none" }} to={"/"}>
+            <button className={"back-to-setting-btn btn"}>
+              Start a New Game
             </button>
           </Link>
         </div>
@@ -70,7 +79,7 @@ class GameOnPlay extends React.Component {
               className={"game-sub-title"}
               style={{ display: "flex", alignItems: "center" }}
             >
-              <span style={{ color: "#FFDC04" }}>Turn Of: </span>
+              <span style={{ color: colors.yellow }}>Turn Of: </span>
               <span style={{ padding: "0 20px" }}>
                 {this.state.currPlayer.id}
               </span>
@@ -79,7 +88,7 @@ class GameOnPlay extends React.Component {
               </Wow>
             </h2>
             <div>
-              <h2 className={"game-sub-title"} style={{ color: "#FFDC04" }}>
+              <h2 className={"game-sub-title"} style={{ color: colors.yellow }}>
                 Winning Table:
               </h2>
               <h3

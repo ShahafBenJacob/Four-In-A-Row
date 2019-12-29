@@ -42,7 +42,6 @@ class GameOnPlay extends React.Component {
       this.setState({
         board: game.board.matrix.matrixArray
       })
-      return true
     } else if (makeAMove) {
       this.setState({
         currPlayer: game.getCurrentPlayer(),

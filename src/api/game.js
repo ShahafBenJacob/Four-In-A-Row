@@ -49,7 +49,6 @@ class Game {
   
   computerMove(){
     const numOfCol = Math.floor(Math.random() * this.board.matrix.numberOfColumns) + 1;
-    console.log(numOfCol)
     if(!this.move(numOfCol)){
       this.computerMove()
     }

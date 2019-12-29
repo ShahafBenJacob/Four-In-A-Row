@@ -33,26 +33,33 @@ class Game {
   }
 
   move = (numOfCol) => {
-      if (this.board.move(numOfCol, this.currentPlayer.color)) {
-        if (this.board.checkEndGame()) {
-          this.currentPlayer.numberOfWins++;
-          return this.currentPlayer;
-        }
-        this.switchUser();
-        return true;
-
+    if (this.board.correctMove(numOfCol, this.currentPlayer.color)) {
+      if (this.board.checkWin()){
+        this.currentPlayer.numberOfWins++;
+        return this.currentPlayer;
+      } else if (this.board.checkFullBoard()){
+        return "game-over";
       }
-      return false;
+      this.switchUser();
+      return true;
+
     }
+    return false;
+  }
   
+  computerMove(){
+    const numOfCol = Math.floor(Math.random() * this.board.matrix.numberOfColumns) + 1;
+    console.log(numOfCol)
+    if(!this.move(numOfCol)){
+      this.computerMove()
+    }
+  }
 
   switchUser = () => {
     if (this.currentPlayer.id === this.player1.id) {
       this.currentPlayer = this.player2;
       if(this.currentPlayer.id === "Computer"){
-        const numOfCol =
-        Math.floor(Math.random() * this.board.matrix.numberOfColumns) + 1;
-        this.move(numOfCol)   
+       this.computerMove()
       }
     } else {
       this.currentPlayer = this.player1;

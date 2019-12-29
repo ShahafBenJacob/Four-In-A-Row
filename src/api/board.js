@@ -29,7 +29,7 @@ class Board{
     return this.capacity.emptyCellsArray;
   }
 
-  move(numOfCol, color){ 
+  correctMove(numOfCol, color){ 
     if (numOfCol > this.matrix.numberOfColumns){
       return false;
     }
@@ -46,14 +46,10 @@ class Board{
     return true;
   }
 
-  checkEndGame(){
+  checkWin(){  
     if (this.capacity.countFullCells < 7){
       return false;
     }
-    return this.checkWin() || this.checkFullBoard();
-  }
-
-  checkWin(){  
     return this.checkRow()|| this.checkCol() || this.checkLeftToRightDiagonal() || this.checkRightToLeftDiagonal();
   }
 

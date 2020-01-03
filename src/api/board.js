@@ -14,7 +14,7 @@ class Board{
     for (let i = 0 ; i < rows ; i++){
       this.matrix.matrixArray.push([]);
       for (let j=0 ; j < columns ; j++){
-        this.matrix.matrixArray[i].push("empty")
+        this.matrix.matrixArray[i].push("empty");
       }
     }
     this.setCapacityArray();
@@ -44,6 +44,13 @@ class Board{
     this.capacity.emptyCellsArray[colIndex]--;
     this.capacity.countFullCells++;
     return true;
+  }
+
+  reverseMove(){
+    const {rowIndex, colIndex} = this.lastMove;
+    this.matrix.matrixArray[rowIndex][colIndex] = "empty";
+    this.capacity.emptyCellsArray[colIndex]++;
+    this.capacity.countFullCells--;
   }
 
   checkWin(){  

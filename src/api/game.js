@@ -1,8 +1,6 @@
- const colors = require('./variabels');
+const colors = require('./variabels');
 const board = require("./board");
 const player = require("./player");
-const color = colors.colors;
-
 
 class Game {
   constructor() {
@@ -33,12 +31,12 @@ class Game {
 
   setPlayers = (numOfPlayers) => {
     if (numOfPlayers === "1") {
-      this.player1.init(color.yellow, this.player1.numberOfWins, "Player 1");
-      this.player2.init(color.red, this.player2.numberOfWins, "Computer");
+      this.player1.init(colors.yellow, this.player1.numberOfWins, "Player 1");
+      this.player2.init(colors.red, this.player2.numberOfWins, "Computer");
       this.currentPlayer = this.player1;
     } else {
-      this.player1.init(color.yellow, this.player1.numberOfWins, "Player 1");
-      this.player2.init(color.red, this.player2.numberOfWins, "Player 2");
+      this.player1.init(colors.yellow, this.player1.numberOfWins, "Player 1");
+      this.player2.init(colors.red, this.player2.numberOfWins, "Player 2");
     }
   }
 
@@ -52,9 +50,7 @@ class Game {
         this.game_status.status = "game-over";
         this.game_status.value = this.currentPlayer;
       }
-      this.switchUser();
       return true;
-
     }
     return false;
   }
@@ -85,3 +81,6 @@ class Game {
 }
 
 module.exports = Game;
+
+
+

@@ -51,6 +51,7 @@ class Board{
     this.matrix.matrixArray[rowIndex][colIndex] = "empty";
     this.capacity.emptyCellsArray[colIndex]++;
     this.capacity.countFullCells--;
+    
   }
 
   checkWin(){  

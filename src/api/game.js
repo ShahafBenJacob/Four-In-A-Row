@@ -6,11 +6,21 @@ const color = colors.colors;
 
 class Game {
   constructor() {
+    this._init();
+  }
+
+  _init(){
     this.board = null;
     this.player1 = new player();
     this.player2 = new player();
     this.currentPlayer = this.player1;
+    this.game_status = {status: null, value: null};
   }
+
+  reset_game(){
+    this._init();
+  }
+
 
   getCurrentPlayer = () => {
     return this.currentPlayer;
@@ -36,9 +46,11 @@ class Game {
     if (this.board.correctMove(numOfCol, this.currentPlayer.color)) {
       if (this.board.checkWin()){
         this.currentPlayer.numberOfWins++;
-        return this.currentPlayer;
+        this.game_status.status = "winner";
+        this.game_status.value = this.currentPlayer;
       } else if (this.board.checkFullBoard()){
-        return "game-over";
+        this.game_status.status = "game-over";
+        this.game_status.value = this.currentPlayer;
       }
       this.switchUser();
       return true;
@@ -46,23 +58,27 @@ class Game {
     }
     return false;
   }
-  
+
+  reverseMove(){
+    this.board.reverseMove();
+  }
+
   computerMove(){
     const numOfCol = Math.floor(Math.random() * this.board.matrix.numberOfColumns) + 1;
-    console.log(numOfCol)
-    if(!this.move(numOfCol)){
-      this.computerMove()
+    if (!this.move(numOfCol)){
+      this.computerMove();
     }
   }
 
   switchUser = () => {
     if (this.currentPlayer.id === this.player1.id) {
       this.currentPlayer = this.player2;
-      if(this.currentPlayer.id === "Computer"){
-       this.computerMove()
-      }
     } else {
       this.currentPlayer = this.player1;
+    }
+
+    if(this.currentPlayer.id === "Computer"){
+      this.computerMove();
     }
     return this.currentPlayer;
   }

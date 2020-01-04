@@ -1,5 +1,5 @@
 import React from "react";
-import { colors } from "../api/variabels";
+import colors from "../api/variabels";
 
 const Coin = (props) => {
   const color = props.color;

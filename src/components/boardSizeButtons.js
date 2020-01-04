@@ -1,5 +1,5 @@
 import React from "react";
-import { colors } from "../api/variabels";
+import colors from "../api/variabels";
 
 const BoardSizeButtons = props => {
   const { value, boardSize, setBoardSize, width, height } = props;

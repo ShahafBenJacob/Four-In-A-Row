@@ -101,6 +101,7 @@ class GameSetting extends React.Component {
                 ? "/GameOnPlay"
                 : "/gameSetting"
             }
+            numOfPlayers={this.state.numOfPlayers}
           >
             <div className={"perfect-center"}>
               <button

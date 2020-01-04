@@ -1,35 +1,39 @@
-const colors = require('./variabels');
+const colors = require("./variabels");
 const board = require("./board");
 const player = require("./player");
 
 class Game {
   constructor() {
-    this._init();
-  }
-
-  _init(){
     this.board = null;
     this.player1 = new player();
     this.player2 = new player();
     this.currentPlayer = this.player1;
-    this.game_status = {status: null, value: null};
+    this.game_status = { winner: false, fullBoard: false, correctMove: false };
   }
 
-  reset_game(){
-    this._init();
+  reset_game(rows, columns, numOfPlayers) {
+    this.setBoard(rows, columns)
+    this.player1 = new player();
+    this.player2 = new player();
+    this.setPlayers(numOfPlayers)
+    this.currentPlayer = this.player1;
+    this.game_status = { winner: false, fullBoard: false, correctMove: false };
   }
-
 
   getCurrentPlayer = () => {
     return this.currentPlayer;
-  }
+  };
 
   setBoard = (rows, columns) => {
     this.board = new board();
     this.board.init(parseInt(rows), parseInt(columns));
+  };
+
+  resetGameStatus = () => {
+    this.game_status = { winner: false, fullBoard: false, correctMove: false };
   }
 
-  setPlayers = (numOfPlayers) => {
+  setPlayers = numOfPlayers => {
     if (numOfPlayers === "1") {
       this.player1.init(colors.yellow, this.player1.numberOfWins, "Player 1");
       this.player2.init(colors.red, this.player2.numberOfWins, "Computer");
@@ -38,30 +42,36 @@ class Game {
       this.player1.init(colors.yellow, this.player1.numberOfWins, "Player 1");
       this.player2.init(colors.red, this.player2.numberOfWins, "Player 2");
     }
-  }
+  };
 
-  move = (numOfCol) => {
-    if (this.board.correctMove(numOfCol, this.currentPlayer.color)) {
-      if (this.board.checkWin()){
+  move = numOfCol => {
+    const gameStatus = this.game_status;
+    const board = this.board;
+    gameStatus.correctMove = board.correctMove(
+      numOfCol,
+      this.currentPlayer.color
+    );
+    if (gameStatus.correctMove) {
+      if (board.checkWin()) {
         this.currentPlayer.numberOfWins++;
-        this.game_status.status = "winner";
-        this.game_status.value = this.currentPlayer;
-      } else if (this.board.checkFullBoard()){
-        this.game_status.status = "game-over";
-        this.game_status.value = this.currentPlayer;
+        gameStatus.winner = true;
+        return
+      } else if (board.checkFullBoard()) {
+        gameStatus.fullBoard = true;
+        return
       }
-      return true;
+      this.switchUser();
     }
-    return false;
-  }
+  };
 
-  reverseMove(){
+  reverseMove() {
     this.board.reverseMove();
   }
 
-  computerMove(){
-    const numOfCol = Math.floor(Math.random() * this.board.matrix.numberOfColumns) + 1;
-    if (!this.move(numOfCol)){
+  computerMove() {
+    const numOfCol =
+      Math.floor(Math.random() * this.board.matrix.numberOfColumns) + 1;
+    if (!this.move(numOfCol)) {
       this.computerMove();
     }
   }
@@ -73,14 +83,11 @@ class Game {
       this.currentPlayer = this.player1;
     }
 
-    if(this.currentPlayer.id === "Computer"){
-      this.computerMove();
-    }
-    return this.currentPlayer;
-  }
+    // if (this.currentPlayer.id === "Computer") {
+    //   this.computerMove();
+    // }
+    // return this.currentPlayer;
+  };
 }
 
 module.exports = Game;
-
-
-

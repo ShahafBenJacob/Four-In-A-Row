@@ -3,7 +3,7 @@ import { game } from "./gameSetting";
 import Board from "./board";
 import { Link } from "react-router-dom";
 import Coin from "./coin";
-import {colors} from '../api/variabels';
+import colors from "../api/variabels";
 import { tada } from "react-animations";
 import styled, { keyframes } from "styled-components";
 const Wow = styled.div`
@@ -15,68 +15,95 @@ class GameOnPlay extends React.Component {
     super();
     this.state = {
       currPlayer: game.getCurrentPlayer(),
-      board: game.board.matrix.matrixArray
+      board: game.board.matrix.matrixArray,
     };
   }
 
-  confirmationDialog = name => {
-    if (window.confirm(`${name} Win! Another game?`)) {
-      game.setBoard(
-        game.board.matrix.numberOfRows,
-        game.board.matrix.numberOfColumns
-      );
-      this.setState({
-        board: game.board.matrix.matrixArray
-      });
-    } else {
-      alert("O.K bye bye!");
-      this.resetBoard()
-    }
-  };
-
-  resetBoard = () => {
+  winner = () => {
+    alert(`${game.currentPlayer.id} winner!`);
     game.setBoard(
       game.board.matrix.numberOfRows,
       game.board.matrix.numberOfColumns
     );
+    game.resetGameStatus();
     this.setState({
+      board: game.board.matrix.matrixArray
+    });
+  };
+
+  fullBoard = () => {
+    alert("full board");
+    game.setBoard(
+      game.board.matrix.numberOfRows,
+      game.board.matrix.numberOfColumns
+    );
+    game.resetGameStatus();
+    this.setState({
+      board: game.board.matrix.matrixArray
+    });
+  };
+
+  correctMove = () => {
+    this.setState({
+      currPlayer: game.getCurrentPlayer(),
+      board: game.board.matrix.matrixArray
+    });
+  };
+
+  illegalMove = () => {
+    alert("Pick another column! This column is full of coins!");
+  };
+
+  move = i => {
+    game.move(i + 1);
+    const gameStatus = game.game_status;
+    const winner = gameStatus.winner;
+    const fullBoard = gameStatus.fullBoard;
+    const correctMove = gameStatus.correctMove;
+    if (winner) {
+      setTimeout(() => this.winner(), 200);
+      this.setState({
+        board: game.board.matrix.matrixArray
+      });
+    } else if (fullBoard) {
+      setTimeout(() => this.fullBoard(), 200);
+      this.setState({
+        board: game.board.matrix.matrixArray
+      });
+    } else if (correctMove) {
+      this.correctMove();
+    } else {
+      this.illegalMove();
+    }
+  };
+
+  resetGame = (numOfPlayers) => {
+    game.reset_game(game.board.matrix.numberOfRows, game.board.matrix.numberOfColumns, numOfPlayers)
+    this.setState({
+      currPlayer: game.getCurrentPlayer(),
       board: game.board.matrix.matrixArray
     });
   }
 
-  move = i => {
-    const makeAMove = game.move(i + 1);
-    if (typeof makeAMove == "object") {
-      setTimeout(() => this.confirmationDialog(makeAMove.id), 500);
-      this.setState({
-        board: game.board.matrix.matrixArray
-      })
-    }else if (typeof makeAMove == "string"){
-      alert("No one won! lets play again!");
-      this.resetBoard()
-    } else if (makeAMove) {
-      this.setState({
-        currPlayer: game.getCurrentPlayer(),
-        board: game.board.matrix.matrixArray
-      });
-    } else if (!makeAMove) {
-      alert("Pick another column! This column is full of coins!");
-    }
-  };
-
   render() {
     const matrix = this.state.board;
+    const numofplayers = this.props;
     return (
       <div className={"game-on-play-wrapper"}>
         <div className={"game-on-play-header"}>
           <h1 className={"main-title game-on-play-main-title"}>
             Four In a Row
           </h1>
-          <Link style={{ textDecoration: "none" }} to={"/gameSetting"}>
+          <div className={"btns-setting-wrapper"}>
+          <Link style={{ textDecoration: "none"}} to={"/gameSetting"}>
             <button className={"back-to-setting-btn btn"}>
-              Back to Setting Page
+              Change Game Setting
             </button>
           </Link>
+          <button className={"reset-btn btn"} onClick={() => this.resetGame(numofplayers)}>
+              Reset Game Setting
+            </button>
+            </div>
         </div>
 
         <div className={"main-game-section row"}>

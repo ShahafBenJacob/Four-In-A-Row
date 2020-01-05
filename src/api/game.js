@@ -59,7 +59,12 @@ class Game {
   };
 
   reverseMove() {
+    if (this.board.capacity.countFullCells < 1 || this.game_status.fullBoard){
+      return false;
+    }
     this.board.reverseMove();
+    this.switchUser();
+    return true;
   }
 
   computerMove() {
@@ -77,10 +82,10 @@ class Game {
       this.currentPlayer = this.player1;
     }
 
-    // if (this.currentPlayer.id === "Computer") {
-    //   this.computerMove();
-    // }
-    // return this.currentPlayer;
+    if (this.currentPlayer.id === "Computer") {
+      this.computerMove();
+    }
+    return this.currentPlayer;
   };
 }
 

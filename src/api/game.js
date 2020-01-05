@@ -45,22 +45,16 @@ class Game {
   };
 
   move = numOfCol => {
-    const gameStatus = this.game_status;
-    const board = this.board;
-    gameStatus.correctMove = board.correctMove(
-      numOfCol,
-      this.currentPlayer.color
-    );
-    if (gameStatus.correctMove) {
-      if (board.checkWin()) {
+    this.game_status.correctMove = this.board.correctMove(numOfCol, this.currentPlayer.color);
+    if (this.game_status.correctMove) {
+      if (this.board.checkWin()) {
         this.currentPlayer.numberOfWins++;
-        gameStatus.winner = true;
-        return
-      } else if (board.checkFullBoard()) {
-        gameStatus.fullBoard = true;
-        return
+        this.game_status.winner = true;
+      } else if (this.board.checkFullBoard()) {
+        this.game_status.fullBoard = true;
+      } else{
+        this.switchUser();
       }
-      this.switchUser();
     }
   };
 

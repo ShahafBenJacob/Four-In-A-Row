@@ -56,10 +56,8 @@ class GameOnPlay extends React.Component {
 
   move = i => {
     game.move(i + 1);
-    const gameStatus = game.game_status;
-    const winner = gameStatus.winner;
-    const fullBoard = gameStatus.fullBoard;
-    const correctMove = gameStatus.correctMove;
+    const {winner, fullBoard, correctMove} = game.game_status;
+
     if (winner) {
       setTimeout(() => this.winner(), 200);
       this.setState({
